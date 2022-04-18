@@ -165,7 +165,7 @@ public class TablaEmpleados extends javax.swing.JFrame {
             System.out.println(" Usuario " + id + " eliminado.");
             JOptionPane.showMessageDialog( null, "Usuario Eliminado Correctamente" );
             
-            // this.limpiarTabla();
+            this.limpiarTabla();
             
             this.consultarUsuarios();
             
@@ -189,10 +189,8 @@ public class TablaEmpleados extends javax.swing.JFrame {
     }//GEN-LAST:event_btnReturnActionPerformed
     
     void limpiarTabla() {
-        int i;
-        for( i = 0; i <= tableUsers.getRowCount(); i++ ) {
-            model.removeRow(i);
-        }
+        System.out.println("Cantidad a Remover " + tableUsers.getRowCount());
+        model.getDataVector().removeAllElements();
         
     }
     

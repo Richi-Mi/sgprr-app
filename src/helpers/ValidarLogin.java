@@ -54,8 +54,6 @@ public class ValidarLogin {
                 System.out.println("Login .- ERROR, No se encontro usuario en DB");
                 String[] ret = {"BadCon"};
                 
-                con.close();
-                
                 return ret;
             }
             

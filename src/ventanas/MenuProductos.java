@@ -9,6 +9,8 @@ import java.awt.Color;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  * @author Mendoza Castañeda José Ricardo
@@ -22,7 +24,9 @@ public class MenuProductos extends javax.swing.JFrame {
     private Statement st;
     private ResultSetImpl res;
     
-    private String idU;
+    private String idU, actionBTNForm = "agregar";
+    
+    private DefaultTableModel model;
     
     public MenuProductos( String id ) {
         initComponents();
@@ -31,6 +35,7 @@ public class MenuProductos extends javax.swing.JFrame {
         this.idU = id;
         this.conexion = new ConnectionToDB();
         this.con = conexion.conectar();
+        
         try {
             this.st = (Statement) con.createStatement();
         } catch (SQLException ex) {
@@ -68,7 +73,7 @@ public class MenuProductos extends javax.swing.JFrame {
         jPanel3 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tableProduct = new javax.swing.JTable();
         jPanel5 = new javax.swing.JPanel();
         btnAct = new javax.swing.JPanel();
         btnActlbl = new javax.swing.JLabel();
@@ -190,6 +195,9 @@ public class MenuProductos extends javax.swing.JFrame {
         lblBtnForm.setText("Agregar Producto");
         lblBtnForm.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         lblBtnForm.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblBtnFormMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 lblBtnFormMouseEntered(evt);
             }
@@ -327,23 +335,15 @@ public class MenuProductos extends javax.swing.JFrame {
 
         getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 0, 550, -1));
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tableProduct.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
                 "Nombre", "Costo:", "Cantidad:", "Marca"
             }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.String.class, java.lang.Float.class, java.lang.Integer.class, java.lang.String.class
-            };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-        });
-        jScrollPane1.setViewportView(jTable1);
+        ));
+        jScrollPane1.setViewportView(tableProduct);
 
         getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 180, 550, 490));
 
@@ -471,6 +471,28 @@ public class MenuProductos extends javax.swing.JFrame {
         btnEl.setBackground( new Color( 153, 0, 0) );
     }//GEN-LAST:event_btnEllblMouseExited
 
+    private void lblBtnFormMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBtnFormMouseClicked
+        String nombre = txtNombre.getText();
+        double precio = Double.parseDouble( txtPrecio.getText() );
+        String marca  = txtMarca.getText();
+        int cantidad  = Integer.parseInt( txtCantidad.getText() );
+        
+        switch( this.actionBTNForm ) {
+            case "agregar":
+                
+                this.agregarProducto( nombre, precio, marca, cantidad );
+                
+                break;
+            case "actualizar":
+                
+                this.actualizarProducto( nombre, precio, marca, cantidad );
+                
+                break;
+        }
+        this.limpiarTabla();
+        this.mostrarProductos();
+    }//GEN-LAST:event_lblBtnFormMouseClicked
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -496,9 +518,61 @@ public class MenuProductos extends javax.swing.JFrame {
         //</editor-fold>
     }
 
-    void mostrarProductos() {
+    void limpiarTabla() {
+        System.out.println("Cantidad a Remover " + tableProduct.getRowCount());
+        model.getDataVector().removeAllElements();
+        
+        txtNombre.setText("");
+        txtPrecio.setText("");
+        txtMarca.setText("");
+        txtCantidad.setText("");
         
     }
+    
+    void mostrarProductos() {
+        String query = "select * from productos;";
+        int idP;
+        
+        try {
+            model = (DefaultTableModel) tableProduct.getModel();
+            res = (ResultSetImpl) st.executeQuery( query );
+            
+            Object[] cliente = new Object[4];
+            
+            while( res.next() ) {
+                
+                idP = res.getInt("id");
+                cliente [0] = res.getString("nombre");
+                cliente [1] = res.getString("costo");
+                cliente [2] = res.getInt("cantidad");
+                cliente [3] = res.getString("marca");
+                // TODO: Fecha creación
+                
+                model.addRow(cliente);
+            }
+            tableProduct.setModel( model );
+        } catch ( Exception e ) {
+            System.out.println(e);
+            System.out.println("ERROR PA");
+        }
+    }
+    
+    void agregarProducto( String nombre, double precio, String marca, int cantidad ) {
+        String query = "insert into productos (nombre, costo, marca, cantidad) values ('" + nombre + "', " + precio + ", '" + marca + "', " + cantidad + ");";
+        try {
+            st.executeUpdate( query );
+            JOptionPane.showMessageDialog(null, "Producto " + nombre + " Agregado Correctamente", "Producto Agregado", JOptionPane.INFORMATION_MESSAGE);
+            
+            
+        } catch (SQLException ex) {
+            System.out.println("ERROR. No se pudo agregar el producto");
+            System.out.println( ex );
+        }
+    }
+    void actualizarProducto( String nombre, double precio, String marca, int cantidad ) {
+        
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel btnAct;
     private javax.swing.JLabel btnActlbl;
@@ -517,7 +591,6 @@ public class MenuProductos extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
     private javax.swing.JSeparator jSeparator4;
-    private javax.swing.JTable jTable1;
     private javax.swing.JLabel lblBtnForm;
     private javax.swing.JLabel lblCantidadForm;
     private javax.swing.JLabel lblFechaEdit;
@@ -528,6 +601,7 @@ public class MenuProductos extends javax.swing.JFrame {
     private javax.swing.JLabel lblNombreForm;
     private javax.swing.JLabel lblPticeForm;
     private javax.swing.JLabel lblTitle;
+    private javax.swing.JTable tableProduct;
     private javax.swing.JTextField txtCantidad;
     private javax.swing.JTextField txtMarca;
     private javax.swing.JTextField txtNombre;

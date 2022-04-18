@@ -63,9 +63,13 @@ public class AgregarUsuario extends javax.swing.JFrame {
         jPanel2.setBackground(new java.awt.Color(51, 153, 0));
 
         btnReturn.setBackground(new java.awt.Color(51, 255, 102));
+        btnReturn.setFont(new java.awt.Font("Liberation Sans", 1, 18)); // NOI18N
+        btnReturn.setForeground(new java.awt.Color(255, 255, 255));
         btnReturn.setText("<");
         btnReturn.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         btnReturn.setBorderPainted(false);
+        btnReturn.setContentAreaFilled(false);
+        btnReturn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnReturn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnReturnActionPerformed(evt);

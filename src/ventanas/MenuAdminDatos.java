@@ -51,13 +51,19 @@ public class MenuAdminDatos extends javax.swing.JFrame {
         background.setBackground(new java.awt.Color(255, 255, 255));
         background.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        btnReturn.setFont(new java.awt.Font("Liberation Sans", 1, 18)); // NOI18N
+        btnReturn.setForeground(new java.awt.Color(255, 255, 255));
         btnReturn.setText("<");
+        btnReturn.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        btnReturn.setBorderPainted(false);
+        btnReturn.setContentAreaFilled(false);
+        btnReturn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnReturn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnReturnActionPerformed(evt);
             }
         });
-        background.add(btnReturn, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+        background.add(btnReturn, new org.netbeans.lib.awtextra.AbsoluteConstraints(4, 4, 30, 30));
 
         lblIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/icon_planta.png"))); // NOI18N
         background.add(lblIcon, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 90, -1, -1));
