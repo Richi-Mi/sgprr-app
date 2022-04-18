@@ -1,15 +1,10 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package ventanas;
 
 import modelos.Usuario;
 
 /**
- *
- * @author BRUNO
+ * @author Bruno Emiliano Villegaz Daza
  */
 public class MenuAdmin extends javax.swing.JFrame {
     private int id;
@@ -118,7 +113,10 @@ public class MenuAdmin extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        // TODO add your handling code here:
+        MenuProductos ventana = new MenuProductos( this.id + "" );
+        ventana.setVisible(true);
+        
+        this.setVisible(false);
     }//GEN-LAST:event_jButton4ActionPerformed
 
     void mostrarNombre() {
