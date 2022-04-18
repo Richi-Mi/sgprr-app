@@ -68,7 +68,11 @@ public class TablaEmpleados extends javax.swing.JFrame {
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        btnReturn.setFont(new java.awt.Font("Liberation Sans", 1, 16)); // NOI18N
+        btnReturn.setForeground(new java.awt.Color(255, 255, 255));
         btnReturn.setText("<");
+        btnReturn.setContentAreaFilled(false);
+        btnReturn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnReturn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnReturnActionPerformed(evt);
@@ -76,10 +80,12 @@ public class TablaEmpleados extends javax.swing.JFrame {
         });
         jPanel1.add(btnReturn, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
+        btnEliminar.setBackground(new java.awt.Color(204, 0, 0));
         btnEliminar.setFont(new java.awt.Font("Purisa", 1, 12)); // NOI18N
+        btnEliminar.setForeground(new java.awt.Color(255, 255, 255));
         btnEliminar.setText("Eliminar Empleado");
         btnEliminar.setBorderPainted(false);
-        btnEliminar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        btnEliminar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnEliminar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnEliminarActionPerformed(evt);
@@ -87,9 +93,12 @@ public class TablaEmpleados extends javax.swing.JFrame {
         });
         jPanel1.add(btnEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 20, 190, -1));
 
+        btnAgregar.setBackground(new java.awt.Color(0, 102, 0));
         btnAgregar.setFont(new java.awt.Font("Purisa", 0, 12)); // NOI18N
+        btnAgregar.setForeground(new java.awt.Color(255, 255, 255));
         btnAgregar.setText("Agregar Empleado");
         btnAgregar.setBorderPainted(false);
+        btnAgregar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnAgregar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAgregarActionPerformed(evt);
@@ -125,7 +134,7 @@ public class TablaEmpleados extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 427, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -153,9 +162,10 @@ public class TablaEmpleados extends javax.swing.JFrame {
             st = (Statement) con.createStatement();
             st.executeUpdate( query );
             
-            JOptionPane.showMessageDialog(null, "Usuario Eliminado Correctamente");
+            System.out.println(" Usuario " + id + " eliminado.");
+            JOptionPane.showMessageDialog( null, "Usuario Eliminado Correctamente" );
             
-            this.limpiarTabla();
+            // this.limpiarTabla();
             
             this.consultarUsuarios();
             
@@ -183,13 +193,14 @@ public class TablaEmpleados extends javax.swing.JFrame {
         for( i = 0; i <= tableUsers.getRowCount(); i++ ) {
             model.removeRow(i);
         }
-        tableUsers.setModel(model);
+        
     }
     
     void consultarUsuarios() {
         String sql = "select * from usuarios;";
         
         try {
+            model = (DefaultTableModel) tableUsers.getModel();
             st = (Statement) con.createStatement();
             res = (ResultSetImpl) st.executeQuery(sql);
             

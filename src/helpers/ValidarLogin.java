@@ -40,8 +40,9 @@ public class ValidarLogin {
                 data[0] = type;
                 data[1] = id;
                 
-                System.out.println(" Correo. - " + data[0]);
-                System.out.println(" Contra. - " + data[1]);
+                System.out.println(" * Login realizado ");
+                System.out.println(" TIPO: " + data[0]);
+                System.out.println(" ID:  " + data[1]);
                 
                 con.close();
                 
@@ -49,7 +50,8 @@ public class ValidarLogin {
             }
             else {
                 // Error en el login
-                System.out.println("Login .- ERROR, No se encontro usuario");
+                System.out.println(" * Login Fallido ");
+                System.out.println("Login .- ERROR, No se encontro usuario en DB");
                 String[] ret = {"BadCon"};
                 
                 con.close();
@@ -59,7 +61,8 @@ public class ValidarLogin {
             
             
         } catch (SQLException ex) {
-            System.out.println("Login .- ERROR, SQL execption");
+            System.out.println("* Login Fallido");
+            System.out.println("Login .- ERROR, Error del programa " + ex);
             String[] ret = {"BadCon"};
             return ret;
         }

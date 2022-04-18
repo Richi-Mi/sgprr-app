@@ -227,6 +227,7 @@ public class Login extends javax.swing.JFrame {
     }//GEN-LAST:event_headerMousePressed
 
     private void headerMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_headerMouseDragged
+        // Mover la pantalla.
         int x = evt.getXOnScreen();
         int y = evt.getYOnScreen();
         this.setLocation( x - xMouse, y - yMouse);

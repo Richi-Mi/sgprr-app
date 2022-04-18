@@ -4,7 +4,9 @@ package modelos;
 import com.mysql.jdbc.Connection;
 import com.mysql.jdbc.ResultSetImpl;
 import com.mysql.jdbc.Statement;
+
 import database.ConnectionToDB;
+
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -19,6 +21,20 @@ public class Producto {
     private Connection con;
     private Statement st;
     private ResultSetImpl res;
+    
+    public boolean setNewData( String key, String data, int id ) {
+        String query = "update productos set " + key + "=" + data + " where id=" + id + ";";
+        try {
+            st.executeUpdate( query );
+            
+            return true;
+        } catch (SQLException ex) {
+            Logger.getLogger(Producto.class.getName()).log(Level.SEVERE, null, ex);
+            
+            System.out.println(" ERROR ");
+            return false;
+        }
+    }
 
     public int getId() {
         return id;
