@@ -153,11 +153,6 @@ public class ActualizarUsuario extends javax.swing.JFrame {
         btnActualizar.setForeground(new java.awt.Color(255, 255, 255));
         btnActualizar.setText("Actualizar Usuario");
         btnActualizar.setMargin(new java.awt.Insets(4, 14, 4, 14));
-        btnActualizar.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnActualizarMouseClicked(evt);
-            }
-        });
         btnActualizar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnActualizarActionPerformed(evt);
@@ -202,14 +197,17 @@ public class ActualizarUsuario extends javax.swing.JFrame {
             String type = comboType.getSelectedItem().toString();
             
            // Aqui se modifica los datos, de momento no agregare eso
-            String query = "update usuarios set id=12, nombre='Hola', apellido ='Dos', edad='12' where id=1 ";           
+            String query = "update usuarios set nombre='" + nombre + "', correo ='" + correo + "', password='" + password + "', sueldo=" + sueldo + ", tipo='" + type + "' where id=" + this.id + ";";           
             
             con = conexion.conectar();
             st = (Statement) con.createStatement();
             st.executeUpdate( query ); // Es lo unico que Cambia Update
             
             JOptionPane.showMessageDialog( null, "Usuario Agregado Correctamente", "Usuario Agregado", JOptionPane.INFORMATION_MESSAGE);
-
+            
+            con.close();
+            System.out.println(" Conexion Cerrada ");
+            
             TablaEmpleados newVentana = new TablaEmpleados( this.idU );
             newVentana.setVisible(true);
             this.setVisible(false);
@@ -220,10 +218,6 @@ public class ActualizarUsuario extends javax.swing.JFrame {
             System.out.println( ex );
         }
     }//GEN-LAST:event_btnActualizarActionPerformed
-
-    private void btnActualizarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnActualizarMouseClicked
-        // Llamar a Actualizar Usuario TODO
-    }//GEN-LAST:event_btnActualizarMouseClicked
 
     void mostrarInfoUsuario() {
         txtNombre.setText( user.getNombre() );
