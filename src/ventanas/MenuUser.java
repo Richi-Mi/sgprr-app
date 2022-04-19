@@ -45,8 +45,10 @@ public class MenuUser extends javax.swing.JFrame {
         btnRegistrar = new javax.swing.JButton();
         lblType = new javax.swing.JLabel();
         jSeparator4 = new javax.swing.JSeparator();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Datos del Usuario");
 
         background.setBackground(new java.awt.Color(255, 255, 255));
         background.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -85,18 +87,32 @@ public class MenuUser extends javax.swing.JFrame {
         lblNombre.setText("Nombre Usuario");
         background.add(lblNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(312, 10, 330, -1));
 
+        btnRegistrar.setBackground(new java.awt.Color(0, 102, 0));
+        btnRegistrar.setFont(new java.awt.Font("Liberation Sans", 1, 16)); // NOI18N
+        btnRegistrar.setForeground(new java.awt.Color(255, 255, 255));
         btnRegistrar.setText("Registrar Ventas");
-        btnRegistrar.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnRegistrarMouseClicked(evt);
+        btnRegistrar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnRegistrar.setMargin(new java.awt.Insets(5, 20, 5, 20));
+        btnRegistrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRegistrarActionPerformed(evt);
             }
         });
-        background.add(btnRegistrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 330, -1, -1));
+        background.add(btnRegistrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 320, -1, -1));
 
         lblType.setFont(new java.awt.Font("Ubuntu Light", 1, 18)); // NOI18N
         lblType.setText("Tipo:");
         background.add(lblType, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 210, -1, -1));
         background.add(jSeparator4, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 233, 350, 10));
+
+        jButton1.setFont(btnRegistrar.getFont());
+        jButton1.setText("Actualizar Datos");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        background.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 320, 160, 30));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -112,9 +128,19 @@ public class MenuUser extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnRegistrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegistrarMouseClicked
-        // TERMINAR DESPUES DE LOS PRODUCTOS.
-    }//GEN-LAST:event_btnRegistrarMouseClicked
+    private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
+        MenuVentas ventana = new MenuVentas( this.id );
+        
+        ventana.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_btnRegistrarActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        DatosUsuario ventana = new DatosUsuario( this.id  + "");
+        ventana.setVisible(true );
+        
+        this.setVisible(false);
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     void mostrarDatos() {
         lblID.setText( user.getId() + "" );
@@ -153,6 +179,7 @@ public class MenuUser extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel background;
     private javax.swing.JButton btnRegistrar;
+    private javax.swing.JButton jButton1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
