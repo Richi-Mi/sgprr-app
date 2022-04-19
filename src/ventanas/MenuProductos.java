@@ -24,7 +24,7 @@ public class MenuProductos extends javax.swing.JFrame {
     private Statement st;
     private ResultSetImpl res;
     
-    private String idU, actionBTNForm = "agregar";
+    private String idU;
     
     private DefaultTableModel model;
     
@@ -60,11 +60,9 @@ public class MenuProductos extends javax.swing.JFrame {
         lblMarcaForm = new javax.swing.JLabel();
         txtMarca = new javax.swing.JTextField();
         jSeparator3 = new javax.swing.JSeparator();
-        lblFechaForm = new javax.swing.JLabel();
         txtCantidad = new javax.swing.JTextField();
         jSeparator4 = new javax.swing.JSeparator();
         lblCantidadForm = new javax.swing.JLabel();
-        lblFechaEdit = new javax.swing.JLabel();
         lblIDForm = new javax.swing.JLabel();
         lblIDEdit = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
@@ -159,10 +157,6 @@ public class MenuProductos extends javax.swing.JFrame {
         txtMarca.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         txtMarca.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
 
-        lblFechaForm.setFont(new java.awt.Font("DejaVu Sans Mono", 1, 16)); // NOI18N
-        lblFechaForm.setForeground(new java.awt.Color(255, 255, 255));
-        lblFechaForm.setText("Fecha de Creacion:");
-
         txtCantidad.setBackground(new java.awt.Color(51, 51, 51));
         txtCantidad.setFont(new java.awt.Font("Liberation Sans", 0, 16)); // NOI18N
         txtCantidad.setForeground(new java.awt.Color(255, 255, 255));
@@ -173,15 +167,11 @@ public class MenuProductos extends javax.swing.JFrame {
         lblCantidadForm.setForeground(new java.awt.Color(255, 255, 255));
         lblCantidadForm.setText("Cantidad del Producto:");
 
-        lblFechaEdit.setFont(lblNombreForm.getFont());
-        lblFechaEdit.setForeground(new java.awt.Color(255, 255, 255));
-        lblFechaEdit.setText("Fecha Generada");
-
-        lblIDForm.setFont(new java.awt.Font("DejaVu Sans Mono", 1, 16)); // NOI18N
+        lblIDForm.setFont(new java.awt.Font("DejaVu Sans Mono", 1, 18)); // NOI18N
         lblIDForm.setForeground(new java.awt.Color(255, 255, 255));
         lblIDForm.setText("ID:");
 
-        lblIDEdit.setFont(lblFechaEdit.getFont());
+        lblIDEdit.setFont(new java.awt.Font("DejaVu Sans Mono", 0, 16)); // NOI18N
         lblIDEdit.setForeground(new java.awt.Color(255, 255, 255));
         lblIDEdit.setText("ID Generado");
 
@@ -259,12 +249,8 @@ public class MenuProductos extends javax.swing.JFrame {
                             .addComponent(lblCantidadForm)
                             .addComponent(lblPticeForm)
                             .addComponent(lblNombreForm)
-                            .addComponent(lblMarcaForm)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(lblFechaForm)
-                                .addGap(18, 18, 18)
-                                .addComponent(lblFechaEdit)))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                            .addComponent(lblMarcaForm))
+                        .addGap(0, 253, Short.MAX_VALUE)))
                 .addContainerGap())
             .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
@@ -296,11 +282,7 @@ public class MenuProductos extends javax.swing.JFrame {
                 .addComponent(txtCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblFechaForm)
-                    .addComponent(lblFechaEdit))
-                .addGap(18, 18, 18)
+                .addGap(55, 55, 55)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblIDForm)
                     .addComponent(lblIDEdit))
@@ -340,9 +322,14 @@ public class MenuProductos extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Nombre", "Costo:", "Cantidad:", "Marca"
+                "Nombre", "Costo", "Cantidad", "Marca", "ID"
             }
         ));
+        tableProduct.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tableProductMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tableProduct);
 
         getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 180, 550, 490));
@@ -350,6 +337,11 @@ public class MenuProductos extends javax.swing.JFrame {
         jPanel5.setBackground(new java.awt.Color(102, 255, 0));
 
         btnAct.setBackground(new java.awt.Color(0, 51, 0));
+        btnAct.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnActMouseClicked(evt);
+            }
+        });
 
         btnActlbl.setFont(new java.awt.Font("Liberation Sans", 1, 16)); // NOI18N
         btnActlbl.setForeground(new java.awt.Color(255, 255, 255));
@@ -357,6 +349,9 @@ public class MenuProductos extends javax.swing.JFrame {
         btnActlbl.setText("Actualizar Producto");
         btnActlbl.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnActlbl.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnActlblMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 btnActlblMouseEntered(evt);
             }
@@ -385,6 +380,9 @@ public class MenuProductos extends javax.swing.JFrame {
         btnEllbl.setText("Eliminar Producto");
         btnEllbl.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnEllbl.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnEllblMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 btnEllblMouseEntered(evt);
             }
@@ -477,21 +475,73 @@ public class MenuProductos extends javax.swing.JFrame {
         String marca  = txtMarca.getText();
         int cantidad  = Integer.parseInt( txtCantidad.getText() );
         
-        switch( this.actionBTNForm ) {
-            case "agregar":
-                
-                this.agregarProducto( nombre, precio, marca, cantidad );
-                
-                break;
-            case "actualizar":
-                
-                this.actualizarProducto( nombre, precio, marca, cantidad );
-                
-                break;
-        }
+        this.agregarProducto( nombre, precio, marca, cantidad );
+        
         this.limpiarTabla();
         this.mostrarProductos();
     }//GEN-LAST:event_lblBtnFormMouseClicked
+
+    private void tableProductMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableProductMouseClicked
+        int fila = tableProduct.getSelectedRow();
+        
+        if( fila == -1 ) {
+            JOptionPane.showMessageDialog(null, "ERROR. No se selecciono ninguna fila");
+        }
+        else {
+            String nombre = tableProduct.getValueAt( fila, 0 ).toString();
+            String costoC = tableProduct.getValueAt( fila, 1 ).toString();
+            String cantidadC  = tableProduct.getValueAt( fila, 2 ).toString();
+            String marca  = tableProduct.getValueAt( fila, 3 ).toString();
+            String id = tableProduct.getValueAt(fila, 4).toString();
+            
+            double costo = Double.parseDouble( costoC  );
+            int cantidad = Integer.parseInt( cantidadC );
+            
+            txtNombre.setText( nombre );
+            txtPrecio.setText( costoC );
+            txtMarca.setText( marca );
+            txtCantidad.setText( cantidadC );
+            lblIDEdit.setText( id );
+        }
+    }//GEN-LAST:event_tableProductMouseClicked
+
+    private void btnActMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnActMouseClicked
+        // VACio
+    }//GEN-LAST:event_btnActMouseClicked
+
+    private void btnActlblMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnActlblMouseClicked
+        String nombre = txtNombre.getText();
+        double precio = Double.parseDouble( txtPrecio.getText() );
+        String marca  = txtMarca.getText();
+        int cantidad  = Integer.parseInt( txtCantidad.getText() );  
+        int id = Integer.parseInt( lblIDEdit.getText() );
+        
+        this.actualizarProducto( nombre, precio, marca, cantidad, id );
+        
+        this.limpiarTabla();
+        this.mostrarProductos();
+    }//GEN-LAST:event_btnActlblMouseClicked
+
+    private void btnEllblMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEllblMouseClicked
+        int fila = tableProduct.getSelectedRow();
+        if( fila == -1 ) {
+            JOptionPane.showMessageDialog(null, "ERROR. No se selecciono ninguna fila");
+        } else {
+            try {
+                String id = tableProduct.getValueAt(fila, 4).toString();
+                String query = "delete from productos where id=" + id + ";";
+                
+                st.executeUpdate( query );
+                JOptionPane.showMessageDialog(null, "Producto Eliminado Correctamente", "Producto Eliminado", JOptionPane.INFORMATION_MESSAGE);                
+            
+                this.limpiarTabla();
+                this.mostrarProductos();
+            } catch (SQLException ex) {
+                System.out.println("ERROR. - " + ex);
+            }
+        }
+        
+    }//GEN-LAST:event_btnEllblMouseClicked
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -531,24 +581,23 @@ public class MenuProductos extends javax.swing.JFrame {
     
     void mostrarProductos() {
         String query = "select * from productos;";
-        int idP;
         
         try {
             model = (DefaultTableModel) tableProduct.getModel();
             res = (ResultSetImpl) st.executeQuery( query );
             
-            Object[] cliente = new Object[4];
+            Object[] producto = new Object[5];
             
             while( res.next() ) {
                 
-                idP = res.getInt("id");
-                cliente [0] = res.getString("nombre");
-                cliente [1] = res.getString("costo");
-                cliente [2] = res.getInt("cantidad");
-                cliente [3] = res.getString("marca");
+                producto [0] = res.getString("nombre");
+                producto [1] = res.getString("costo");
+                producto [2] = res.getInt("cantidad");
+                producto [3] = res.getString("marca");
+                producto [4] = res.getInt("id");
                 // TODO: Fecha creación
                 
-                model.addRow(cliente);
+                model.addRow(producto);
             }
             tableProduct.setModel( model );
         } catch ( Exception e ) {
@@ -569,8 +618,15 @@ public class MenuProductos extends javax.swing.JFrame {
             System.out.println( ex );
         }
     }
-    void actualizarProducto( String nombre, double precio, String marca, int cantidad ) {
-        
+    void actualizarProducto( String nombre, double precio, String marca, int cantidad, int id ) {
+        try {
+            String query = "update productos set nombre='" + nombre + "', costo=" + precio + ", marca='" + marca + "', cantidad=" + cantidad + " where id=" + id + ";";
+            
+            st.executeUpdate( query );
+            JOptionPane.showMessageDialog(null, "Producto " + nombre + " actualizado Correctamente", "Producto Actualizado", JOptionPane.INFORMATION_MESSAGE);
+        } catch (SQLException ex) {
+            System.out.println(" ERROR. - " + ex);
+        }
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -593,8 +649,6 @@ public class MenuProductos extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator4;
     private javax.swing.JLabel lblBtnForm;
     private javax.swing.JLabel lblCantidadForm;
-    private javax.swing.JLabel lblFechaEdit;
-    private javax.swing.JLabel lblFechaForm;
     private javax.swing.JLabel lblIDEdit;
     private javax.swing.JLabel lblIDForm;
     private javax.swing.JLabel lblMarcaForm;

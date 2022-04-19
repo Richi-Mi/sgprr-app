@@ -8,6 +8,7 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import modelos.Usuario;
 
 /**
  * @author Mendoza Castañeda José Ricardo
@@ -17,17 +18,23 @@ import javax.swing.JOptionPane;
 
 public class ActualizarUsuario extends javax.swing.JFrame {
 
-    private String idU;
+    private Usuario user;
+    
+    private String idU, id;
     
     private Connection con;
     private Statement st;
     private ConnectionToDB conexion = new ConnectionToDB();
     
-    public ActualizarUsuario( String idU ) {
+    public ActualizarUsuario( String idU, String id ) {
         setLocationRelativeTo(null);
         initComponents();
         
         this.idU = idU;
+        this.id = id;
+        
+        this.user = new Usuario( Integer.parseInt( this.id ) );
+        this.mostrarInfoUsuario();
     }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -49,25 +56,33 @@ public class ActualizarUsuario extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         txtSueldo = new javax.swing.JTextField();
         btnActualizar = new javax.swing.JButton();
+        jSeparator1 = new javax.swing.JSeparator();
+        jSeparator2 = new javax.swing.JSeparator();
+        jSeparator3 = new javax.swing.JSeparator();
+        jSeparator4 = new javax.swing.JSeparator();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel2.setBackground(new java.awt.Color(51, 153, 0));
+        jPanel2.setBackground(new java.awt.Color(0, 102, 102));
 
         btnReturn.setBackground(new java.awt.Color(51, 255, 102));
+        btnReturn.setFont(new java.awt.Font("Liberation Sans", 1, 18)); // NOI18N
+        btnReturn.setForeground(new java.awt.Color(255, 255, 255));
         btnReturn.setText("<");
         btnReturn.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         btnReturn.setBorderPainted(false);
+        btnReturn.setContentAreaFilled(false);
+        btnReturn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnReturn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnReturnActionPerformed(evt);
             }
         });
 
-        jLabel1.setFont(new java.awt.Font("Purisa", 1, 24)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("DejaVu Sans Mono", 1, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Actualizar Usuario");
@@ -104,15 +119,21 @@ public class ActualizarUsuario extends javax.swing.JFrame {
 
         jLabel3.setText("Nombre");
         jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, -1, -1));
+
+        txtNombre.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         jPanel1.add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, 240, -1));
 
         jLabel4.setText("Correo");
         jLabel4.setToolTipText("");
         jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 180, -1, -1));
+
+        txtCorreo.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         jPanel1.add(txtCorreo, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 210, 240, -1));
 
         jLabel5.setText("Password");
         jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 260, -1, -1));
+
+        txtPassword.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         jPanel1.add(txtPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 290, 240, -1));
 
         jLabel6.setText("Tipo:");
@@ -123,18 +144,30 @@ public class ActualizarUsuario extends javax.swing.JFrame {
 
         jLabel7.setText("Sueldo");
         jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 340, -1, -1));
+
+        txtSueldo.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         jPanel1.add(txtSueldo, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 370, 280, -1));
 
-        btnActualizar.setBackground(new java.awt.Color(51, 153, 0));
+        btnActualizar.setBackground(new java.awt.Color(0, 102, 102));
         btnActualizar.setFont(new java.awt.Font("Liberation Sans", 1, 15)); // NOI18N
         btnActualizar.setForeground(new java.awt.Color(255, 255, 255));
         btnActualizar.setText("Actualizar Usuario");
+        btnActualizar.setMargin(new java.awt.Insets(4, 14, 4, 14));
+        btnActualizar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnActualizarMouseClicked(evt);
+            }
+        });
         btnActualizar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnActualizarActionPerformed(evt);
             }
         });
         jPanel1.add(btnActualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(55, 430, 340, -1));
+        jPanel1.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 160, 240, 30));
+        jPanel1.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 240, 240, -1));
+        jPanel1.add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 320, 240, -1));
+        jPanel1.add(jSeparator4, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 393, 280, 10));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -188,7 +221,16 @@ public class ActualizarUsuario extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnActualizarActionPerformed
 
+    private void btnActualizarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnActualizarMouseClicked
+        // Llamar a Actualizar Usuario TODO
+    }//GEN-LAST:event_btnActualizarMouseClicked
+
     void mostrarInfoUsuario() {
+        txtNombre.setText( user.getNombre() );
+        txtCorreo.setText( user.getCorreo() );
+        txtSueldo.setText( Double.toString( user.getSueldo() ) );
+        txtPassword.setText( user.getPassword() );
+        
         
     }
     
@@ -231,6 +273,10 @@ public class ActualizarUsuario extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JSeparator jSeparator2;
+    private javax.swing.JSeparator jSeparator3;
+    private javax.swing.JSeparator jSeparator4;
     private javax.swing.JTextField txtCorreo;
     private javax.swing.JTextField txtNombre;
     private javax.swing.JTextField txtPassword;

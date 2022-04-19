@@ -53,6 +53,10 @@ public class AgregarUsuario extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         txtSueldo = new javax.swing.JTextField();
         btnAgregar = new javax.swing.JButton();
+        jSeparator1 = new javax.swing.JSeparator();
+        jSeparator2 = new javax.swing.JSeparator();
+        jSeparator3 = new javax.swing.JSeparator();
+        jSeparator4 = new javax.swing.JSeparator();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Agregar Usuario");
@@ -60,7 +64,7 @@ public class AgregarUsuario extends javax.swing.JFrame {
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel2.setBackground(new java.awt.Color(51, 153, 0));
+        jPanel2.setBackground(new java.awt.Color(0, 51, 0));
 
         btnReturn.setBackground(new java.awt.Color(51, 255, 102));
         btnReturn.setFont(new java.awt.Font("Liberation Sans", 1, 18)); // NOI18N
@@ -76,7 +80,7 @@ public class AgregarUsuario extends javax.swing.JFrame {
             }
         });
 
-        jLabel1.setFont(new java.awt.Font("Purisa", 1, 24)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("DejaVu Sans Mono", 1, 28)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Agregar Usuario");
@@ -113,15 +117,21 @@ public class AgregarUsuario extends javax.swing.JFrame {
 
         jLabel3.setText("Nombre");
         jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, -1, -1));
+
+        txtNombre.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         jPanel1.add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, 240, -1));
 
         jLabel4.setText("Correo");
         jLabel4.setToolTipText("");
         jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 180, -1, -1));
+
+        txtCorreo.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         jPanel1.add(txtCorreo, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 210, 240, -1));
 
         jLabel5.setText("Password");
         jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 260, -1, -1));
+
+        txtPassword.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         jPanel1.add(txtPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 290, 240, -1));
 
         jLabel6.setText("Tipo:");
@@ -132,18 +142,25 @@ public class AgregarUsuario extends javax.swing.JFrame {
 
         jLabel7.setText("Sueldo");
         jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 340, -1, -1));
+
+        txtSueldo.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         jPanel1.add(txtSueldo, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 370, 280, -1));
 
-        btnAgregar.setBackground(new java.awt.Color(51, 153, 0));
+        btnAgregar.setBackground(new java.awt.Color(0, 51, 0));
         btnAgregar.setFont(new java.awt.Font("Liberation Sans", 1, 15)); // NOI18N
         btnAgregar.setForeground(new java.awt.Color(255, 255, 255));
         btnAgregar.setText("Agregar Usuario");
+        btnAgregar.setMargin(new java.awt.Insets(4, 14, 4, 14));
         btnAgregar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAgregarActionPerformed(evt);
             }
         });
         jPanel1.add(btnAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(55, 430, 340, -1));
+        jPanel1.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 160, 240, -1));
+        jPanel1.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 240, 240, -1));
+        jPanel1.add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 320, 240, -1));
+        jPanel1.add(jSeparator4, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 400, 280, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -234,6 +251,10 @@ public class AgregarUsuario extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JSeparator jSeparator2;
+    private javax.swing.JSeparator jSeparator3;
+    private javax.swing.JSeparator jSeparator4;
     private javax.swing.JTextField txtCorreo;
     private javax.swing.JTextField txtNombre;
     private javax.swing.JTextField txtPassword;

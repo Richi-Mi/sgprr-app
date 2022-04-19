@@ -55,6 +55,7 @@ public class TablaEmpleados extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Tabla de Empleados");
 
         tableUsers.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -64,6 +65,11 @@ public class TablaEmpleados extends javax.swing.JFrame {
                 "ID", "Nombre:", "Correo:", "Sueldo"
             }
         ));
+        tableUsers.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tableUsersMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tableUsers);
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -110,6 +116,11 @@ public class TablaEmpleados extends javax.swing.JFrame {
         btnActualizar.setText("Actualizar Empleado");
         btnActualizar.setBorderPainted(false);
         btnActualizar.setEnabled(false);
+        btnActualizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnActualizarActionPerformed(evt);
+            }
+        });
         jPanel1.add(btnActualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 100, 190, -1));
 
         jLabel2.setFont(new java.awt.Font("Purisa", 1, 24)); // NOI18N
@@ -187,6 +198,29 @@ public class TablaEmpleados extends javax.swing.JFrame {
             Logger.getLogger(TablaEmpleados.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_btnReturnActionPerformed
+
+    private void tableUsersMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableUsersMouseClicked
+        btnActualizar.setEnabled(true);
+    }//GEN-LAST:event_tableUsersMouseClicked
+
+    private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
+        int fila = tableUsers.getSelectedRow();
+        System.out.println(" Llegue aqui " + fila);
+        if( fila == -1 ) {
+            JOptionPane.showMessageDialog(null, "No se ha seleccionado ningun usuario");
+        }
+        else {
+            System.out.println("LLegue al ID" );
+            String id = tableUsers.getValueAt( fila, 0 ).toString();
+            System.out.println("ID: " + id );
+            
+            ActualizarUsuario ventana = new ActualizarUsuario( this.idU, id );
+            System.out.println("llegue despues de la interfaz");
+            ventana.setVisible( true );
+            
+            this.setVisible( false );
+        }
+    }//GEN-LAST:event_btnActualizarActionPerformed
     
     void limpiarTabla() {
         System.out.println("Cantidad a Remover " + tableUsers.getRowCount());
